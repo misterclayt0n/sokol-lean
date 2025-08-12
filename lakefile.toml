@@ -1,0 +1,10 @@
+name = "sokol-lean"
+version = "0.1.0"
+defaultTargets = ["sokol-lean"]
+
+[[lean_lib]]
+name = "SokolLean"
+
+[[lean_exe]]
+name = "sokol-lean"
+root = "Main"

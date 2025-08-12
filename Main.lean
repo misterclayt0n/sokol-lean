@@ -1,4 +1,7 @@
 import SokolLean
 
+open SokolLean
+
 def main : IO Unit :=
-  IO.println s!"Hello, {hello}!"
+  let r := addTwo 40 2
+  IO.println s!"add_two(40, 2) = {r.toNat}"

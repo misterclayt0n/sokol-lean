@@ -14,7 +14,14 @@ target «c.test.o» (pkg : NPackage _package.name) : FilePath := do
   let srcJob ←  inputBinFile src
   buildO o srcJob
 
+target «c.accum.o» (pkg : NPackage _package.name) : FilePath := do
+  let src := pkg.dir / "c" / "accum.c"
+  let o   := pkg.irDir / "c" / "accum.o"
+  let job ← inputBinFile src
+  buildO o job
+  
 extern_lib «c_add» (pkg : NPackage _package.name) := do
   let name := nameToStaticLib "c_add"
-  let oJob ←  fetch <| pkg.target ``«c.test.o»
-  buildStaticLib (pkg.staticLibDir / name) #[oJob]
+  let o1 ←  fetch <| pkg.target ``«c.test.o»
+  let o2 ←  fetch <| pkg.target ``«c.accum.o»
+  buildStaticLib (pkg.staticLibDir / name) #[o1, o2]
